@@ -21,14 +21,14 @@ const Navbar = () => {
 
   const linkBase = "transition-colors font-bold";
   const linkColor = isScrolled
-    ? "text-primary-foreground hover:text-accent"
-    : "text-foreground hover:text-primary";
+    ? "text-primary hover:text-accent"
+    : "text-white hover:text-accent";
 
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-secondary/90 backdrop-blur-md shadow-md"
+          ? "bg-white backdrop-blur-md shadow-md"
           : "bg-transparent"
       }`}
     >
