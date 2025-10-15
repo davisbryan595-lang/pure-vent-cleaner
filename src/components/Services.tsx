@@ -32,9 +32,10 @@ const services = [
 
 const Services = () => {
   const scrollToContact = (service?: string) => {
-    const search = service ? `?service=${encodeURIComponent(service)}` : "";
-    const url = `#contact${search}`;
-    window.location.hash = url;
+    const params = new URLSearchParams(window.location.search);
+    if (service) params.set("service", service);
+    const newUrl = `${window.location.pathname}?${params.toString()}#contact`;
+    window.history.replaceState({}, "", newUrl);
     const element = document.getElementById("contact");
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
