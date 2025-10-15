@@ -62,21 +62,38 @@ const BeforeAfterSlider = ({ beforeSrc, afterSrc }: { beforeSrc: string; afterSr
   }, []);
 
   return (
-    <div ref={containerRef} className="relative overflow-hidden rounded-xl shadow-lg cursor-col-resize select-none">
-      <img src={afterSrc} alt="After cleaning" className="w-full h-auto block" />
-      <div className="absolute inset-0" style={{ width: `${position}%`, overflow: "hidden" }}>
-        <img src={beforeSrc} alt="Before cleaning" className="w-full h-auto block" />
+    <div>
+      <div ref={containerRef} className="relative overflow-hidden rounded-xl shadow-lg cursor-col-resize select-none">
+        <img src={afterSrc} alt="After cleaning" className="w-full h-auto block" />
+        <div className="absolute inset-0" style={{ width: `${position}%`, overflow: "hidden" }}>
+          <img src={beforeSrc} alt="Before cleaning" className="w-full h-auto block" />
+        </div>
+        <div className="absolute inset-y-0" style={{ left: `calc(${position}% - 1px)` }}>
+          <div className="h-full w-0.5 bg-white/80" />
+        </div>
+        <div className="absolute top-4 left-4 bg-destructive text-destructive-foreground px-3 py-1 rounded-lg font-bold">Before</div>
+        <div className="absolute top-4 right-4 bg-primary text-primary-foreground px-3 py-1 rounded-lg font-bold">After</div>
+        <div
+          className="absolute top-1/2 -translate-y-1/2"
+          style={{ left: `calc(${position}% - 16px)` }}
+        >
+          <div className="h-8 w-8 rounded-full bg-background/90 border border-border shadow-md grid place-items-center text-foreground font-bold">⇔</div>
+        </div>
       </div>
-      <div className="absolute inset-y-0" style={{ left: `calc(${position}% - 1px)` }}>
-        <div className="h-full w-0.5 bg-white/80" />
-      </div>
-      <div className="absolute top-4 left-4 bg-destructive text-destructive-foreground px-3 py-1 rounded-lg font-bold">Before</div>
-      <div className="absolute top-4 right-4 bg-primary text-primary-foreground px-3 py-1 rounded-lg font-bold">After</div>
-      <div
-        className="absolute top-1/2 -translate-y-1/2"
-        style={{ left: `calc(${position}% - 16px)` }}
-      >
-        <div className="h-8 w-8 rounded-full bg-background/90 border border-border shadow-md grid place-items-center text-foreground font-bold">⇔</div>
+      <div className="mt-4">
+        <input
+          type="range"
+          min={0}
+          max={100}
+          value={position}
+          onChange={(e) => setPosition(Number((e.target as HTMLInputElement).value))}
+          className="w-full"
+          aria-label="Adjust before/after position"
+        />
+        <div className="mt-2 flex justify-between text-xs text-muted-foreground">
+          <span>More Before</span>
+          <span>More After</span>
+        </div>
       </div>
     </div>
   );
