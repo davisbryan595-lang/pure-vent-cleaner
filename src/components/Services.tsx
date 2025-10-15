@@ -1,32 +1,40 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Wind, Home, Flame, Sparkles } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import heroBg from "@/assets/hero-bg.jpg";
+import techImg from "@/assets/about-technician.jpg";
 
 const services = [
   {
-    icon: Wind,
+    key: "air-duct-cleaning",
     title: "Air Duct Cleaning",
     description: "Remove dust, debris, and allergens from HVAC ducts.",
+    image: techImg,
   },
   {
-    icon: Home,
+    key: "vent-cleaning",
     title: "Vent Cleaning",
     description: "Improve airflow and indoor air quality with professional vent cleaning.",
+    image: heroBg,
   },
   {
-    icon: Flame,
+    key: "dryer-vent-cleaning",
     title: "Dryer Vent Cleaning",
     description: "Prevent lint buildup and reduce fire hazards.",
+    image: heroBg,
   },
   {
-    icon: Sparkles,
+    key: "system-sanitization",
     title: "System Sanitization",
     description: "Kill bacteria and odors, leaving your air fresh and healthy.",
+    image: techImg,
   },
 ];
 
 const Services = () => {
-  const scrollToContact = () => {
+  const scrollToContact = (service?: string) => {
+    const search = service ? `?service=${encodeURIComponent(service)}` : "";
+    const url = `#contact${search}`;
+    window.location.hash = url;
     const element = document.getElementById("contact");
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
@@ -45,25 +53,29 @@ const Services = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {services.map((service, index) => (
             <Card
-              key={index}
-              className="animate-fade-up hover:shadow-xl transition-all duration-300 border-border bg-card"
+              key={service.key}
+              className="animate-fade-up overflow-hidden group border-border bg-card"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <CardHeader>
-                <div className="w-16 h-16 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                  <service.icon className="w-8 h-8 text-primary" />
+              <div className="relative h-56">
+                <img src={service.image} alt={service.title} className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-4">
+                  <h3 className="text-xl font-bold text-white">{service.title}</h3>
                 </div>
-                <CardTitle className="text-xl text-card-foreground">{service.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-muted-foreground">{service.description}</CardDescription>
-              </CardContent>
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-secondary/80 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <p className="text-primary-foreground mb-4">{service.description}</p>
+                  <Button variant="cta" size="sm" onClick={() => scrollToContact(service.title)}>
+                    Request {service.title}
+                  </Button>
+                </div>
+              </div>
             </Card>
           ))}
         </div>
 
         <div className="text-center animate-fade-up">
-          <Button variant="cta" size="lg" onClick={scrollToContact}>
+          <Button variant="cta" size="lg" onClick={() => scrollToContact()}>
             Request a Free Quote
           </Button>
         </div>
