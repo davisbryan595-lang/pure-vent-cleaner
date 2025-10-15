@@ -33,7 +33,7 @@ const Pricing = () => {
   };
 
   return (
-    <section id="pricing" className="py-20 bg-muted/30">
+    <section id="pricing" className="py-20 bg-gradient-to-b from-primary/10 to-background">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16 animate-fade-up">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Pricing Plans</h2>
