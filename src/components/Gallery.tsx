@@ -101,7 +101,7 @@ const BeforeAfterSlider = ({ beforeSrc, afterSrc }: { beforeSrc: string; afterSr
 
 const Gallery = () => {
   return (
-    <section id="gallery" className="py-20 bg-muted/30">
+    <section id="gallery" className="py-20 bg-gradient-to-b from-secondary/5 to-background">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12 animate-fade-up">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Our Work</h2>
