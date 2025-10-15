@@ -33,7 +33,7 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <section id="testimonials" className="py-20 bg-background">
+    <section id="testimonials" className="py-20 bg-gradient-to-b from-primary/5 to-background">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16 animate-fade-up">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
@@ -41,13 +41,13 @@ const Testimonials = () => {
           </h2>
         </div>
 
-        <div className="max-w-5xl mx-auto relative">
+        <div className="max-w-2xl mx-auto relative">
           <Carousel opts={{ loop: true }}>
             <CarouselContent>
               {testimonials.map((t, index) => (
-                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                <CarouselItem key={index} className="basis-full">
                   <Card className="overflow-hidden bg-card border-border">
-                    <div className="h-40 w-full overflow-hidden">
+                    <div className="h-48 w-full overflow-hidden">
                       <img src={t.image} alt={t.name} className="w-full h-full object-cover" />
                     </div>
                     <CardContent className="pt-4">
