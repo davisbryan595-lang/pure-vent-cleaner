@@ -32,10 +32,10 @@ const FloatingButtons = () => {
           variant="cta"
           size="lg"
           onClick={scrollToContact}
-          className="shadow-2xl animate-float rounded-full"
+          className="shadow-2xl rounded-full"
         >
           <MessageCircle className="w-5 h-5 mr-2" />
-          Get a Quote
+          Get a Free Quote
         </Button>
       </div>
 

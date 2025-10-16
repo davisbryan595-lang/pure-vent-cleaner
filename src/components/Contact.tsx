@@ -1,10 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { Mail, Phone, Facebook } from "lucide-react";
+
+const serviceOptions = [
+  "Air Duct Cleaning",
+  "Vent Cleaning",
+  "Dryer Vent Cleaning",
+  "System Sanitization",
+];
+
+const planOptions = ["Basic", "Standard", "Premium"];
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -12,12 +22,21 @@ const Contact = () => {
     email: "",
     phone: "",
     message: "",
+    service: "",
+    plan: "",
   });
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const service = params.get("service") || "";
+    const plan = params.get("plan") || "";
+    setFormData((prev) => ({ ...prev, service, plan }));
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     toast.success("Thank you! We'll get back to you soon.");
-    setFormData({ name: "", email: "", phone: "", message: "" });
+    setFormData({ name: "", email: "", phone: "", message: "", service: "", plan: "" });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -53,33 +72,67 @@ const Contact = () => {
                   className="mt-2"
                 />
               </div>
-              
-              <div>
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="mt-2"
-                />
+
+              <div className="grid sm:grid-cols-2 gap-6">
+                <div>
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="mt-2"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="phone">Phone</Label>
+                  <Input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    required
+                    className="mt-2"
+                  />
+                </div>
               </div>
-              
-              <div>
-                <Label htmlFor="phone">Phone</Label>
-                <Input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  required
-                  className="mt-2"
-                />
+
+              <div className="grid sm:grid-cols-2 gap-6">
+                <div>
+                  <Label>Service</Label>
+                  <Select value={formData.service} onValueChange={(v) => setFormData((p) => ({ ...p, service: v }))}>
+                    <SelectTrigger className="mt-2">
+                      <SelectValue placeholder="Select a service" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {serviceOptions.map((s) => (
+                        <SelectItem key={s} value={s}>
+                          {s}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <Label>Pricing Plan</Label>
+                  <Select value={formData.plan} onValueChange={(v) => setFormData((p) => ({ ...p, plan: v }))}>
+                    <SelectTrigger className="mt-2">
+                      <SelectValue placeholder="Select a plan" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {planOptions.map((p) => (
+                        <SelectItem key={p} value={p}>
+                          {p}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
-              
+
               <div>
                 <Label htmlFor="message">Message / Service Request</Label>
                 <Textarea
@@ -102,7 +155,7 @@ const Contact = () => {
           <div className="animate-fade-up space-y-8">
             <div>
               <h3 className="text-2xl font-bold text-foreground mb-6">Contact Information</h3>
-              
+
               <div className="space-y-4">
                 <div className="flex items-start gap-4">
                   <Mail className="w-6 h-6 text-primary mt-1" />
@@ -142,12 +195,9 @@ const Contact = () => {
             </div>
 
             <div className="bg-card border border-border rounded-lg p-6">
-              <p className="text-sm text-muted-foreground mb-3">
-                Follow us for tips and updates:
-              </p>
+              <p className="text-sm text-muted-foreground mb-3">Follow us for tips and updates:</p>
               <div className="flex flex-wrap gap-2 text-xs text-primary">
-                #DuctCleaning #VentCleaning #CleanAir #IndoorAirQuality #HealthyHome 
-                #HomeMaintenance #HVAC #AllergyRelief #BreatheEasy #DeepClean #DustFree
+                #DuctCleaning #VentCleaning #CleanAir #IndoorAirQuality #HealthyHome #HomeMaintenance #HVAC #AllergyRelief #BreatheEasy #DeepClean #DustFree
               </div>
             </div>
           </div>

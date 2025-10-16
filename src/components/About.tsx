@@ -2,7 +2,7 @@ import technicianImage from "@/assets/about-technician.jpg";
 
 const About = () => {
   return (
-    <section id="about" className="py-20 bg-muted/30">
+    <section id="about" className="py-20 bg-gradient-to-b from-primary/5 to-background">
       <div className="container mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="animate-fade-up">
