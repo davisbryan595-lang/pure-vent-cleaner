@@ -19,10 +19,9 @@ const Navbar = () => {
     }
   };
 
+  // Keep links black at all times
   const linkBase = "transition-colors font-bold";
-  const linkColor = isScrolled
-    ? "text-primary hover:text-accent"
-    : "text-white hover:text-accent";
+  const linkColor = "text-black hover:text-accent";
 
   return (
     <nav
@@ -34,31 +33,54 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-6 py-3 md:py-4">
         <div className="flex items-center justify-between">
-          <div className="flex items-center cursor-pointer" onClick={() => scrollToSection("hero")}>
+          <div
+            className="flex items-center cursor-pointer"
+            onClick={() => scrollToSection("hero")}
+          >
             <img
               src={logo}
               alt="Pure Vent Services"
-              className={`${isScrolled ? "h-12 md:h-16" : "h-16 md:h-20"} transition-all duration-300`}
+              className={`${
+                isScrolled ? "h-12 md:h-16" : "h-16 md:h-20"
+              } transition-all duration-300`}
             />
           </div>
 
           <div className="hidden md:flex items-center gap-8">
-            <button onClick={() => scrollToSection("hero")} className={`${linkBase} ${linkColor}`}>
+            <button
+              onClick={() => scrollToSection("hero")}
+              className={`${linkBase} ${linkColor}`}
+            >
               Home
             </button>
-            <button onClick={() => scrollToSection("about")} className={`${linkBase} ${linkColor}`}>
+            <button
+              onClick={() => scrollToSection("about")}
+              className={`${linkBase} ${linkColor}`}
+            >
               About
             </button>
-            <button onClick={() => scrollToSection("services")} className={`${linkBase} ${linkColor}`}>
+            <button
+              onClick={() => scrollToSection("services")}
+              className={`${linkBase} ${linkColor}`}
+            >
               Services
             </button>
-            <button onClick={() => scrollToSection("pricing")} className={`${linkBase} ${linkColor}`}>
+            <button
+              onClick={() => scrollToSection("pricing")}
+              className={`${linkBase} ${linkColor}`}
+            >
               Pricing
             </button>
-            <button onClick={() => scrollToSection("gallery")} className={`${linkBase} ${linkColor}`}>
+            <button
+              onClick={() => scrollToSection("gallery")}
+              className={`${linkBase} ${linkColor}`}
+            >
               Gallery
             </button>
-            <button onClick={() => scrollToSection("contact")} className={`${linkBase} ${linkColor}`}>
+            <button
+              onClick={() => scrollToSection("contact")}
+              className={`${linkBase} ${linkColor}`}
+            >
               Contact
             </button>
           </div>
